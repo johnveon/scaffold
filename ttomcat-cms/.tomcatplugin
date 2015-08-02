@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir>src/main/webapp</rootDir>
+    <exportSource>false</exportSource>
+    <reloadable>true</reloadable>
+    <redirectLogger>true</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation></warLocation>
+    <extraInfo>
+	  
+    </extraInfo>
+    <webPath>/ttomcat-cms-0.0.1-SNAPSHOT</webPath>
+    <webClassPathEntries>
+          <webClassPathEntry>/ttomcat-cms/target/classes</webClassPathEntry>
+          <webClassPathEntry>M2_REPO/fion/com/ttomcat-common/0.0.1-SNAPSHOT/ttomcat-common-0.0.1-SNAPSHOT.jar</webClassPathEntry>
+          <webClassPathEntry>M2_REPO/fion/com/ttomcat-interface/0.0.1-SNAPSHOT/ttomcat-interface-0.0.1-SNAPSHOT.jar</webClassPathEntry>
+          <webClassPathEntry>M2_REPO/fion/com/ttomcat-vo/0.0.1-SNAPSHOT/ttomcat-vo-0.0.1-SNAPSHOT.jar</webClassPathEntry>
+          <webClassPathEntry>M2_REPO/fion/com/ttomcat-service/0.0.1-SNAPSHOT/ttomcat-service-0.0.1-SNAPSHOT.jar</webClassPathEntry>
+          <webClassPathEntry>M2_REPO/fion/com/ttomcat-dao/0.0.1-SNAPSHOT/ttomcat-dao-0.0.1-SNAPSHOT.jar</webClassPathEntry>
+    </webClassPathEntries>
+</tomcatProjectProperties>
