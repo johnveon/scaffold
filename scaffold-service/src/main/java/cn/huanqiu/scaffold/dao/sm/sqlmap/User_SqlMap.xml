@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.huanqiu.scaffold.dao.sm.dao.UserDAO" >
+  <resultMap id="BaseResultMap" type="cn.huanqiu.scaffold.service.cms.sm.vo.UserVO" >
+    <id column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_CODE" property="userCode" jdbcType="VARCHAR" />
+    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="INDUSTRY" property="industry" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="CREATE_USEAR" property="createUsear" jdbcType="VARCHAR" />
+    <result column="MODIFY_USER" property="modifyUser" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_NAME, USER_CODE, USER_PWD, EMAIL, INDUSTRY, CREATE_DATE, MODIFY_DATE, 
+    CREATE_USEAR, MODIFY_USER, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SM_USER
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="findUser" resultMap="BaseResultMap"
+		parameterType="cn.huanqiu.scaffold.service.cms.sm.vo.UserVO">
+
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM T_SM_USER
+		<trim prefix="where" prefixOverrides="AND | OR | and | or">
+			<if test="userId != null">
+				AND USER_ID = #{userId}
+			</if>
+			<if test="userCode != null">
+				AND USER_CODE = #{userCode}
+			</if>
+			<if test="userName != null">
+				AND USER_NAME = #{userName}
+			</if>
+			<if test="userPwd != null">
+				AND USER_PWD = #{userPwd}
+			</if>
+		</trim>
+		ORDER BY USER_ID DESC
+
+		
+	</select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_SM_USER
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.huanqiu.scaffold.service.cms.sm.vo.UserVO" >
+  		<selectKey resultType="java.lang.Integer" keyProperty="userId">
+			select last_insert_id()
+		</selectKey>
+    insert into T_SM_USER (USER_ID, USER_NAME, USER_CODE, 
+      USER_PWD, EMAIL, INDUSTRY, 
+      CREATE_DATE, MODIFY_DATE, CREATE_USEAR, 
+      MODIFY_USER, STATUS)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, #{createUsear,jdbcType=VARCHAR}, 
+      #{modifyUser,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.huanqiu.scaffold.service.cms.sm.vo.UserVO" >
+  		<selectKey resultType="java.lang.Integer" keyProperty="userId">
+			select last_insert_id()
+		</selectKey>
+    insert into T_SM_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userCode != null" >
+        USER_CODE,
+      </if>
+      <if test="userPwd != null" >
+        USER_PWD,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="industry != null" >
+        INDUSTRY,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="createUsear != null" >
+        CREATE_USEAR,
+      </if>
+      <if test="modifyUser != null" >
+        MODIFY_USER,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="industry == null" >
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUsear != null" >
+        #{createUsear,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyUser != null" >
+        #{modifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.huanqiu.scaffold.service.cms.sm.vo.UserVO" >
+    update T_SM_USER
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        USER_CODE = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null" >
+        USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        INDUSTRY = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="industry == null" >
+        INDUSTRY = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUsear != null" >
+        CREATE_USEAR = #{createUsear,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyUser != null" >
+        MODIFY_USER = #{modifyUser,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.huanqiu.scaffold.service.cms.sm.vo.UserVO" >
+    update T_SM_USER
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_CODE = #{userCode,jdbcType=VARCHAR},
+      USER_PWD = #{userPwd,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      INDUSTRY = #{industry,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MODIFY_DATE = #{modifyDate,jdbcType=TIMESTAMP},
+      CREATE_USEAR = #{createUsear,jdbcType=VARCHAR},
+      MODIFY_USER = #{modifyUser,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
